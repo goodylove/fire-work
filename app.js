@@ -77,10 +77,9 @@ function animate() {
   ctx.fillStyle = "rgba(0,0,0,0.05)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  particles.forEach((Particle, i) => {
-    if (Particle.alpha > 0) {
-      console.log(particles);
-      Particle.updateMethod();
+  particles.forEach((particle, i) => {
+    if (particle.alpha > 0) {
+      particle.updateMethod();
     } else {
       particles.splice(i, 1);
     }
@@ -107,19 +106,24 @@ animate();
 function handleMouseMove(e) {
   mouse.x = e.clientX;
   mouse.y = e.clientY;
-  const particleCount = 400;
+  const particleCount = 2000;
   const angleIncrement = (Math.PI * 2) / particleCount;
+  const power = 30;
 
-  console.log(mouse);
   for (let i = 0; i < particleCount; i++) {
     particles.push(
-      new Particle(mouse.x, mouse.y, 3, "blue", {
-        x: Math.cos(angleIncrement * i) * Math.random(),
-        y: Math.sin(angleIncrement * i) * Math.random(),
-      })
+      new Particle(
+        mouse.x,
+        mouse.y,
+        3,
+        `hsl(${Math.random() * 360}, 50%, 50%)`,
+        {
+          x: Math.cos(angleIncrement * i) * Math.random() * power,
+          y: Math.sin(angleIncrement * i) * Math.random() * power,
+        }
+      )
     );
   }
-  //   console.log(particles);
 }
 
 addEventListener("click", handleMouseMove);
