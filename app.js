@@ -24,15 +24,19 @@ class Particle {
     this.radius = radius;
     this.color = color;
     this.velocity = velocity;
+    this.alpha = 1;
   }
   draw() {
+    ctx.save();
+    ctx.globalAlpha = this.alpha;
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    // ctx.stroke();
+
     ctx.fillStyle = this.color;
     ctx.fill();
-    // ctx.stroke();
+
     ctx.closePath();
+    ctx.restore();
   }
   updateMethod() {
     this.draw();
@@ -41,6 +45,7 @@ class Particle {
     this.velocity.y += gravity;
     this.x += this.velocity.x;
     this.y += this.velocity.y;
+    this.alpha -= 0.005;
   }
 }
 let particles;
@@ -72,8 +77,13 @@ function animate() {
   ctx.fillStyle = "rgba(0,0,0,0.05)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  particles.forEach((Particle) => {
-    Particle.updateMethod();
+  particles.forEach((Particle, i) => {
+    if (Particle.alpha > 0) {
+      console.log(particles);
+      Particle.updateMethod();
+    } else {
+      particles.splice(i, 1);
+    }
   });
   //   particles.updateMethod();
   //   circle2.x = mouse.x;
@@ -103,13 +113,13 @@ function handleMouseMove(e) {
   console.log(mouse);
   for (let i = 0; i < particleCount; i++) {
     particles.push(
-      new Particle(mouse.x, mouse.y, 5, "blue", {
+      new Particle(mouse.x, mouse.y, 3, "blue", {
         x: Math.cos(angleIncrement * i) * Math.random(),
         y: Math.sin(angleIncrement * i) * Math.random(),
       })
     );
   }
-  console.log(particles);
+  //   console.log(particles);
 }
 
 addEventListener("click", handleMouseMove);
