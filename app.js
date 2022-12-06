@@ -52,24 +52,6 @@ let particles;
 
 function init() {
   particles = [];
-  //   for (let i = 0; i < 4; i++) {
-  //     let x = Math.random() * innerWidth;
-  //     let y = Math.random() * innerHeight;
-  //     const radius = 100;
-  //     const color = "blue";
-
-  //     if (i != 0) {
-  //       for (let j = 0; j < particles.length; j++) {
-  //         if (getDistance(x, y, particles[j].x, particles[j].y) - radius * 2 < 0)
-  //           x = Math.random() * innerWidth;
-  //         y = Math.random() * innerHeight;
-  //         j = -1;
-  //       }
-  //     }
-
-  //     particles.push(new Particle(x, y, radius, color));
-  //     console.log(particles);
-  //   }
 }
 
 function animate() {
@@ -84,19 +66,6 @@ function animate() {
       particles.splice(i, 1);
     }
   });
-  //   particles.updateMethod();
-  //   circle2.x = mouse.x;
-  //   circle2.y = mouse.y;
-  //   circle2.updateMethod();
-
-  //   if (
-  //     getDistance(circle1.x, circle1.y, circle2.x, circle2.y) <
-  //     circle1.radius + circle2.radius
-  //   )
-  //     circle1.color = "red";
-  //   else {
-  //     circle1.color = "black";
-  //   }
 }
 init();
 animate();
